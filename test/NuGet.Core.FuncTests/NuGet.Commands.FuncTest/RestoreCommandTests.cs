@@ -748,13 +748,13 @@ namespace NuGet.Commands.FuncTest
             // Assert
             result.Success.Should().BeTrue();
             result.GetAllInstalled().Should().HaveCount(1, because: logger.ShowMessages());
-            result.LockFile.LogMessages.Should().HaveCount(1);
+            logger.Errors.Should().Be(0, because: logger.ShowErrors());
+            logger.Warnings.Should().Be(1, because: logger.ShowWarnings());
+            result.LockFile.LogMessages.Should().HaveCount(1, because: logger.ShowMessages());
             result.LockFile.LogMessages.Select(e => e.Code).Should().AllBeEquivalentTo(NuGetLogCode.NU1701);
             result.LockFile.LogMessages.Select(e => e.Message).First().Should().
                 Be("Package 'a 1.0.0' was restored using '.NETFramework,Version=v4.7.2' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.");
             result.LockFile.LogMessages.Single(e => e.LibraryId == "a");
-            logger.Errors.Should().Be(0, because: logger.ShowErrors());
-            logger.Warnings.Should().Be(1, because: logger.ShowWarnings());
         }
 
         [Fact]
