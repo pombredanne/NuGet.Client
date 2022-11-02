@@ -125,6 +125,13 @@ stages:
         testRunTitle: "NuGet.Client EndToEnd Tests On Windows"
       condition: "succeededOrFailed()"
 
+    - task: PublishPipelineArtifact@1
+      displayName: "Publish logs"
+      inputs:
+        artifactName: logs - $(System.JobDisplayName) - Attempt $(System.JobAttempt)
+        targetPath: "$(System.DefaultWorkingDirectory)\\testresults"
+      condition: "succeededOrFailed()"
+
     - task: ComponentGovernanceComponentDetection@0
       displayName: 'Component Detection'
 
