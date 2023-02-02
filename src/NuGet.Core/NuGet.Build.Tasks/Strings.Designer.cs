@@ -196,7 +196,7 @@ namespace NuGet.Build.Tasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Evaluated {0} project(s) in {1:D2}ms ({2} builds, {3} failures)..
+        ///   Looks up a localized string similar to Evaluated {0:N0} project(s) in {1:N1}s and executed {2:N0} builds with {3:N0} failures in {4:N1}s..
         /// </summary>
         public static string ProjectEvaluationSummary {
             get {

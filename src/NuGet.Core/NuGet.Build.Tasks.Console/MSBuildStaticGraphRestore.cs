@@ -921,6 +921,12 @@ namespace NuGet.Build.Tasks.Console
                     return ProjectInstance.FromFile(path, projectOptions);
                 });
 
+                sw.Stop();
+
+                double evaluationElapsedSeconds = sw.Elapsed.TotalSeconds;
+
+                sw.Restart();
+
                 int buildCount = 0;
                 int failedBuildSubmissionCount = 0;
 
@@ -982,7 +988,7 @@ namespace NuGet.Build.Tasks.Console
 
                 sw.Stop();
 
-                MSBuildLogger.LogInformation(string.Format(CultureInfo.CurrentCulture, Strings.ProjectEvaluationSummary, projectGraph.ProjectNodes.Count, sw.ElapsedMilliseconds, buildCount, failedBuildSubmissionCount));
+                MSBuildLogger.LogInformation(string.Format(CultureInfo.CurrentCulture, Strings.ProjectEvaluationSummary, projectGraph.ProjectNodes.Count, evaluationElapsedSeconds, buildCount, failedBuildSubmissionCount, sw.Elapsed.TotalSeconds));
 
                 if (failedBuildSubmissionCount != 0)
                 {
