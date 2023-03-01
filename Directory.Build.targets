@@ -1,3 +1,9 @@
 <Project>
+  <Target Name="EmbedGeneratedAssemblyInfoFileInBinLog"
+          AfterTargets="GenerateAssemblyInfo">
+    <ItemGroup>
+      <EmbedInBinLog Include="$(GeneratedAssemblyInfoFile)" />
+    </ItemGroup>
+  </Target>
   <Import Project="build\common.targets" Condition="'$(IsCrossTargetingBuild)' == 'true' And '$(_WasCommonPropsImported)' != 'true'" />
 </Project>
